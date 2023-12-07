@@ -10,11 +10,13 @@ datasource db {
   url      = "file:./dev.db"
 }
 
-model Products {
-  id            Int
+model clients {
+  id            Int         @id
   nome          String
   altura        Float
   lactose       Boolean
   peso          Float
   atleta        Boolean
+
+  @@map("clients")
 }
