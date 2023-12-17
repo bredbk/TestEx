@@ -68,4 +68,28 @@ router.post("/clients", multerConfig.single("file"), async (request: Request, re
 
 });
 
+router.get("/clients", async (request: Request, response: Response) => {
+    const clients = await prismaClient.clients.findMany();
+    return response.json(clients);
+});
+
+router.get("/clients/:id", async (request: Request, response: Response) => {
+    const { id } = request.params;
+    const client = await prismaClient.clients.findFirst({
+        where: {
+            id: Number(id)
+        }
+    });
+    return response.json(client);
+});
+router.get("/client/:name", async (request: Request, response: Response) => {
+    const { name } = request.params;
+    const client = await prismaClient.clients.findFirst({
+        where: {
+            nome: name
+        }
+    });
+    return response.json(client);
+});
+
 export { router };
